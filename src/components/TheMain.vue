@@ -12,6 +12,7 @@ export default{
     created(){
         axios.get("https://rickandmortyapi.com/api/character")
         .then( (resp) => {
+            console.log(resp);
             console.log(resp.data.results);
 
             this.store.CharacterData = resp.data.results;
@@ -27,6 +28,9 @@ export default{
     <div class="container">
         <div class="alert alert-primary" v-if="LocalHostError">
             {{ LocalHostError }}
+        </div>
+        <div>
+            <h5 class="text-white">Count pages</h5>
         </div>
         <div class="row row-cols-5 g-4 pt-3">
             <div class="col" 
