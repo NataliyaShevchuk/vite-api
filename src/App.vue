@@ -1,11 +1,13 @@
 <script>
-import TheMain from './components/TheMain.vue'
+import TheMain from './components/TheMain.vue';
+import TheLoader from './components/TheLoader.vue'
+import { store } from "./store";
 
 export default{
-  components: { TheMain },
+  components: { TheMain, TheLoader },
     data(){
       return{
-
+        store,
       }
     }
 }
@@ -13,6 +15,9 @@ export default{
 
 <template>
     <TheMain/>
+    <Transition name="slide-fade">
+      <TheLoader v-if="store.loading" />
+    </Transition>
 </template>
 
 <style lang="scss">
