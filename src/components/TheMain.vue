@@ -10,15 +10,22 @@ export default{
         }
     },
     created(){
+        this.store.loading = true;
+
         axios.get("https://rickandmortyapi.com/api/character")
         .then( (resp) => {
             console.log(resp);
             console.log(resp.data.results);
 
             this.store.CharacterData = resp.data.results;
+            store.pageInfo = resp.data.info;
+
+            this.store.loading = false;
         })
         .catch(() => {
             this.LocalHostError = "A causa di un guasto l'operazione non è andata a buon fine. Riprova più tardi.";
+
+            this.store.loading = false;
         });
     }
 }

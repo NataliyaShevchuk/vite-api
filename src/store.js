@@ -3,9 +3,16 @@ import axios from "axios";
 
 export const store = reactive({
     CharacterData: [],
-    loading: true,
+    pageInfo: {},
+    /**
+     * @property {number} count,
+     * @property { number} pages,
+     * @property {string | null}  next,
+     * @property { null } prev
+     */
+    loading: false,
 });
 
-export function fetchCharacters() {
+// export function fetchCharacters() {
 
-}
+// }
