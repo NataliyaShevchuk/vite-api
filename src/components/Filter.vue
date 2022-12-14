@@ -11,6 +11,7 @@ export default {
             }
         }
     },
+    emits: ["search"],
     methods: {
         onSearchClick(){
             this.$emit("search", {...this.filter});
@@ -29,7 +30,7 @@ export default {
         <div style="min-height: 20px;">
             <div class="collapse collapse-horizontal" id="collapseWidthExample">
                 <div class="card card-body" style="width: 100%;">
-                    <input @submit.prevent="onSearchClick" type="text" placeholder="Scrivi qui.." name="gender" 
+                    <input class="form-control" @submit.prevent="onSearchClick" type="text" placeholder="Scrivi qui.." name="gender" 
                     v-model="filter.gender">
                 </div>
             </div>
