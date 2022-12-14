@@ -1,43 +1,64 @@
 <script>
+import Pagination from './Pagination.vue';
 import axios from "axios";
-import { store }  from "../store.js";
+
+import { store, fetchCharacters }  from "../store.js";
 
 export default{
+    components: { Pagination },
+    props:{
+        /**
+         * @property {string} gender,
+         */
+    },
+    character: {
+        type: Object,
+        required: true,
+    },
     data(){
         return{
-            LocalHostError: "",
             store,
+            newPage: 1,
+            
+        }
+    },
+    computed: {
+        // genderReveal(){
+        //     let toReturn = " ";
+
+        //     if(this.store.CharacterData.gender === "Male" ){
+        //         toReturn = "Male";
+        //     }else if(this.store.CharacterData.gender === "Female" ){
+        //         toReturn = "Female";
+        //     }
+
+        //     return toReturn;
+        // }
+    },
+    methods: {
+        onPageChange(newPage){
+            this.store.currentPage = newPage;
+
+            fetchCharacters();
         }
     },
     created(){
-        this.store.loading = true;
-
-        axios.get("https://rickandmortyapi.com/api/character")
-        .then( (resp) => {
-            console.log(resp);
-            console.log(resp.data.results);
-
-            this.store.CharacterData = resp.data.results;
-            store.pageInfo = resp.data.info;
-
-            this.store.loading = false;
-        })
-        .catch(() => {
-            this.LocalHostError = "A causa di un guasto l'operazione non è andata a buon fine. Riprova più tardi.";
-
-            this.store.loading = false;
-        });
+        fetchCharacters();
     }
 }
 </script>
 
 <template>
+
     <div class="container">
-        <div class="alert alert-primary" v-if="LocalHostError">
-            {{ LocalHostError }}
+        <Pagination class="py-2"
+        :currentPage="store.currentPage"
+        @pageChange="onPageChange"></Pagination>
+        <div class="alert alert-primary" v-if="store.LocalHostError">
+            {{ store.LocalHostError }}
         </div>
         <div>
-            <h5 class="text-white">Count pages</h5>
+            <h5 class="text-white">Count pages {{store.pageInfo.count}} </h5>
         </div>
         <div class="row row-cols-5 g-4 pt-3">
             <div class="col" 
@@ -47,10 +68,14 @@ export default{
                 <div class="card-body">
                     <h5 class="card-title"> {{ character.name }} </h5>
                     <p class="card-text"> {{ character.species}} </p>
+                    <!-- <p class="card-text" :class="genderReveal"> </p> -->
                 </div>
                 </div>
             </div>
         </div>
+        <Pagination class="py-2"
+        :currentPage="store.currentPage"
+        @pageChange="onPageChange"></Pagination>
     </div>
 </template>
 

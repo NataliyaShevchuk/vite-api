@@ -1,20 +1,31 @@
 <script>
 import TheMain from './components/TheMain.vue';
-import TheLoader from './components/TheLoader.vue'
-import { store } from "./store";
+import TheLoader from './components/TheLoader.vue';
+import Pagination from './components/Pagination.vue';
+import Filter from './components/Filter.vue';
+import { store, fetchCharacters } from "./store";
 
 export default{
-  components: { TheMain, TheLoader },
+  components: { TheMain, TheLoader, Pagination, Filter },
     data(){
       return{
         store,
+        filter:{
+          gender: "",
+        }
       }
-    }
+    },
+    methods: {
+      onSearch(filterActive){
+        this.store.contenutoDiFilter = filterActive;
+      }
+    },
 }
 </script>
 
 <template>
-    <TheMain/>
+    <Filter/>
+    <TheMain @search="OnSearch"/>
     <Transition name="slide-fade">
       <TheLoader v-if="store.loading" />
     </Transition>

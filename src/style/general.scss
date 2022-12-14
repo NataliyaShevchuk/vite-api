@@ -1,6 +1,10 @@
 @use "bootstrap/scss/bootstrap";
 
 
+$transition-collapse:  height .35s  ease;
+$transition-collapse-width: width .35s ease;
+
+
 $color-text: #00E164;
 $color-primary: #001633;
 $bg-color: #fefefe;
@@ -36,4 +40,24 @@ $main-font: 'Montserrat', sans-serif;
 .slide-fade-leave-to {
     transform: translateX(20px);
     opacity: 0;
+}
+
+.collapse {
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: $transition-collapse;
+
+
+    &.collapse-horizontal {
+        width: 0;
+        height: auto;
+        transition: $transition-collapse-width;
+    }
+
 }
