@@ -10,6 +10,7 @@ export default{
     data(){
       return{
         store,
+        
         filter:{
           gender: "",
         }
@@ -18,6 +19,7 @@ export default{
     methods: {
       onSearch(filterActive){
         this.store.contenutoDiFilter = filterActive;
+
       }
     },
 }
@@ -25,7 +27,7 @@ export default{
 
 <template>
     <Filter/>
-    <TheMain @search="OnSearch"/>
+    <TheMain @search="onSearch"/>
     <Transition name="slide-fade">
       <TheLoader v-if="store.loading" />
     </Transition>

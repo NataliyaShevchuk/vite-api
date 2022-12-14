@@ -1,7 +1,6 @@
 <script>
 import { store, fetchCharacters }  from "../store.js";
 
-
 export default {
     data(){
         return{
@@ -28,12 +27,15 @@ export default {
             </button>
         </p>
         <div style="min-height: 20px;">
-            <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                <div class="card card-body" style="width: 100%;">
-                    <input class="form-control" @submit.prevent="onSearchClick" type="text" placeholder="Scrivi qui.." name="gender" 
-                    v-model="filter.gender">
+            <form action="" @submit.prevent="onSearchClick"> 
+                <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                    <div class="card card-body" style="width: 100%;">
+                        <input class="form-control"  type="text" placeholder="Scrivi qui.." name="gender" 
+                        v-model="filter.gender">
+                        <button class="btn btn-primary" > submit</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
